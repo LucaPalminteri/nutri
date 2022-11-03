@@ -12,6 +12,7 @@ export default function Home() {
       </Head>
 
       <h1>Luca Palminteri</h1>
+      <h4>Home</h4>
     </div>
   )
 }
