@@ -13,7 +13,7 @@ export default function Home() {
 
   const getMeals = async () => {
     try {
-      const {data,error} = await supabase.from("meals").select()
+      const {data,error} = await supabase.from("meals").select().order('created_at',{ascending:false})
       setMeals(data)
     } catch (error) {
       alert(error)
