@@ -15,4 +15,16 @@ nav {
   display: flex;
   justify-content: space-around;
   padding: 20px 0;
+  border-bottom: 2px solid grey;
+}
+
+form {
+  margin: 20px;
+  margin-top: 40px;
+  display: flex;
+  flex-direction: column;
+}
+
+form button {
+  margin-top: 30px;
 }
