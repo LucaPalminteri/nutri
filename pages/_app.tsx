@@ -1,14 +1,19 @@
 import '../styles/globals.css'
 import type { AppProps } from 'next/app'
 import Link from 'next/link'
+import { useEffect } from 'react'
 
 export default function App({ Component, pageProps }: AppProps) {
 
   const style = {backgroundColor: '#DEDEDE', padding: '4px 8px', borderRadius: '8px'}
   let isHome = true
 
-if(window.location.pathname == '/') isHome = true
-else isHome = false
+  useEffect(() => {
+    if(window.location.pathname == '/') isHome = true
+    else isHome = false
+  }, [])
+  
+
 
   return (
     <>
