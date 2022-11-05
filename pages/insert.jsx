@@ -13,7 +13,9 @@ function insert() {
         let type = ""
         let hours = date.getHours() - 3
 
-        if (hours < 0) (hours * (-1)) + 21
+        if (hours = -1) type = "Dinner"
+        if (hours = -2) type = "Dinner"
+        if (hours = -3) type = "Dinner"
         if(hours >= 0 && hours < 10) type = "Breakfast"
         else if(hours >= 10 && hours < 12) type = "Breakfast Snack"
         else if(hours >= 12 && hours < 14) type = "Lunch"
