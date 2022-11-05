@@ -65,11 +65,23 @@ textarea:focus {
   margin: 20px;
   background-color: #EFEFEF;
   border-radius: 12px;
-  box-shadow: 0 0 10px 10px #DEDEDE;
+  box-shadow: 0 0 15px 6px #DEDEDE;
+}
+
+.card header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.card header button {
+  color: red;
+  background-color: transparent;
+  padding: 2px;
 }
 
 .card .divider {
-  height: 1px;
+  height: 2px;
   width: 100%;
   background-color: #FEFEFE;
 }
