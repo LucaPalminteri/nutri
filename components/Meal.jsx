@@ -14,6 +14,8 @@ function Meal({meal}) {
     if (minutes < 10) minutes = '0' + minutes;
     if (hours < 10) minutes = '0' + hours;
 
+    if(hours == -1 || hours == -2 || hours == -3) hours += 24
+
 
     const handleDelete = async () => {
       try {

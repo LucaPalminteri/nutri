@@ -1,5 +1,5 @@
 import React, { use, useRef } from 'react'
-import { supabase } from '../supabaseClient'
+import insertDB from '../functions/insertDB';
 
 function insert() {
 
@@ -7,39 +7,37 @@ function insert() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-
-        let date = new Date()
-        let type = ""
-        let hours = date.getHours()
-
-        if (hours == -1 || hours == -2 || hours == -3) type = "Dinner"
-        if(hours >= 0 && hours < 10) type = "Breakfast"
-        else if(hours >= 10 && hours < 12) type = "Breakfast Snack"
-        else if(hours >= 12 && hours < 14) type = "Lunch"
-        else if(hours >= 14 && hours < 16) type = "Afterlunch Snack"
-        else if(hours >= 16 && hours < 19) type = "Afternoon Snack"
-        else if(hours >= 19 && hours < 21) type = "Night Snack"
-        else if(hours >= 21 && hours < 24) type = "Dinner"
-
-        
-
-        try {
-            const { data, error} = await supabase.from('meals').insert({
-                created_at: new Date(),
-                description:description.current.value,
-                type
-            }) 
-            description.current.value = ""
-        } catch (error) {
-            alert(error)
-        }
+        await insertDB(description.current.value)
+        description.current.value = ""
     }
+
+    const handleCustomInsert = async (n) => {
+        switch(n){
+            case 1: await insertDB("1 Cappuccino Cup")
+                break;
+            case 2: await insertDB("1 Glass of Water")
+                break;
+            case 3: await insertDB("1 Handful of Nuts")
+                break;
+            case 4: await insertDB("4 toast with Penaut Butter")
+                break;
+        }
+
+        alert('OK')
+    }
+
   return (
     <div>
         <form onSubmit={(e) => handleSubmit(e)}>
             <textarea ref={description}></textarea>
-            <button>Submit</button>
+            <button type='submit'>Submit</button>
         </form>
+        <div className='btn-container'>
+            <button className='shortcut-btn' onClick={() => handleCustomInsert(1)}>Cappuccino</button>
+            <button className='shortcut-btn' onClick={() => handleCustomInsert(2)}>Glass of Water</button>
+            <button className='shortcut-btn' onClick={() => handleCustomInsert(3)}>Handful of Nuts</button>
+            <button className='shortcut-btn' onClick={() => handleCustomInsert(4)}>4 toast with Penaut Butter</button>
+        </div>
     </div>
   )
 }

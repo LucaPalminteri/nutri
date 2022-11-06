@@ -21,7 +21,7 @@ export default function Home() {
     }
   }
   
-  const arrMeals = meals.map(meal => <Meal key={meal.id} meal={meal}/>)
+  const arrMeals = meals.map((meal,index) => <Meal key={index} meal={meal}/>)
 
   return (
     <div>

@@ -100,6 +100,19 @@ textarea:focus {
   font-weight: 300;
 }
 
+.btn-container {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 15px;
+}
+
+.btn-container .shortcut-btn {
+  background-color: #DD0;
+  color: #000;
+  margin: 5px;
+  flex-grow: 1;
+}
+
 @keyframes spinner {
   0% {
       transform: translate3d(-50%, -50%, 0) rotate(0deg);
