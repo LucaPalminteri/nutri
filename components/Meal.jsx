@@ -8,7 +8,7 @@ function Meal({meal}) {
 
     let monthName = date.toLocaleString("en-US", { month: "long" });
     let dayName = date.toLocaleString("en-US", { weekday: "long" });
-    let dayNumber = date.getDay() - 1;
+    let dayNumber = date.getDate();
     let hours = date.getHours() - 3;
     let minutes = date.getMinutes();
     if (minutes < 10) minutes = '0' + minutes;

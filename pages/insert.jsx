@@ -9,11 +9,8 @@ function insert() {
         e.preventDefault();
 
         let date = new Date()
-
         let type = ""
         let hours = date.getHours()
-
-        console.log(hours);
 
         if (hours == -1 || hours == -2 || hours == -3) type = "Dinner"
         if(hours >= 0 && hours < 10) type = "Breakfast"
@@ -23,6 +20,8 @@ function insert() {
         else if(hours >= 16 && hours < 19) type = "Afternoon Snack"
         else if(hours >= 19 && hours < 21) type = "Night Snack"
         else if(hours >= 21 && hours < 24) type = "Dinner"
+
+        
 
         try {
             const { data, error} = await supabase.from('meals').insert({
