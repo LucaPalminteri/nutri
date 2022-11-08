@@ -4,6 +4,10 @@ import { supabase } from '../supabaseClient';
 
 function Meal({meal}) {
 
+  //TODO: fix last 3 hours of the day
+
+  let mealDate = meal.created_at;
+
     const date = new Date(meal.created_at)
 
     let monthName = date.toLocaleString("en-US", { month: "long" });

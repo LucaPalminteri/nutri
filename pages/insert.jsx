@@ -1,4 +1,4 @@
-import React, { use, useRef } from 'react'
+import React, { useRef } from 'react'
 import insertDB from '../functions/insertDB';
 
 function insert() {
