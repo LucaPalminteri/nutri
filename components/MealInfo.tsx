@@ -56,7 +56,8 @@ function MealInfo({meal,foods}: Props) {
             let total_fat = 0;
 
   return (
-    <main className='text'>{meal.description}
+    <main className='text'>
+        <p>{meal.description}</p>
         <table>
             <thead>
                 <th>Amount</th>
@@ -88,7 +89,7 @@ function MealInfo({meal,foods}: Props) {
                 }) : ""}
             </tbody>
         </table>
-          <p>Total info:</p>
+          <p>TOTAL INFO</p>
           <table>
             <tr>
                 <th>Calories</th>
