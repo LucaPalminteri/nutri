@@ -10,6 +10,8 @@ export default function App({ Component, pageProps }: AppProps) {
     <nav>
       <Link href='/'>Home</Link>
       <Link href='/insert'>Insert</Link>
+      <Link href='/old-insert'>Old Insert</Link>
+
     </nav>
     <Component {...pageProps} />
     </>
