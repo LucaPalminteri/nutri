@@ -1,6 +1,5 @@
 import React, { useRef } from 'react'
 import { useEffect, useState } from 'react';
-import insertDB from '../functions/insertDB';
 import { supabase } from '../supabaseClient'
 function insert() {
 
@@ -14,7 +13,6 @@ function insert() {
     
     const nameFood = useRef();
     const amountFood = useRef();
-    const mealName = useRef();
 
     const getFood = async () => {
         try {
@@ -30,24 +28,11 @@ function insert() {
         e.preventDefault();
 
         // validations
-        if(mealName.current.value == "") {
-            alert("Meal Name Field is empty")
-            return ;
-        }
 
-        console.log(selectedFoods);
-        console.log(infoFoods);
-
-
-        if(selectedFoods.length == 0 || infoFoods.length == 0) {
-            alert("Food info fields are empty")
-            return ;
-        }
-
-        if(infoFoods.some(food => food.name == "default")) {
-            alert("Some food info fields are empty")
-            return ;
-        }
+        // if(infoFoods.some(food => food.name == "default")) {
+        //     alert("Some food info fields are empty")
+        //     return ;
+        // }
 
         let date = new Date()
         let type = ""
@@ -65,8 +50,7 @@ function insert() {
         let meal_info = JSON.stringify([...infoFoods,{name:nameFood.current.value,amount:amountFood.current.value}])
         
         try {
-            const { data, error} = await supabase.from('meals').insert({created_at: new Date(),description:mealName.current.value,type,meal_info}) 
-            mealName.current.value = "";
+            const { data, error} = await supabase.from('meals').insert({created_at: new Date(),type,meal_info}) 
             setSelectedFoods([])
             setInfoFoods([])
         } catch (error) {
@@ -98,23 +82,17 @@ function insert() {
         )) 
     }
 
-    //    setInfoFoods(prev => prev.concat({name:nameFood.current.value,amount:amountFood.current.value}));
     
-
-
-
-
+    
   return (
     <div className='insert'>
         <form onSubmit={(e) => handleSubmit(e)}>
-            <label>Meal Name:</label>
-            <textarea ref={mealName}/>
             <div className='label-container'>
                 <label>Food Name:</label>
                 <label>Amount (g/L):</label>
             </div>
             {selectedFoods}
-            <button type='button' onClick={()=> selectFoods()}>+</button>
+            <button type='button' className='trapezoid-down' onClick={()=> selectFoods()}></button>
             <button type='submit'>Submit</button>
         </form>
     </div>
