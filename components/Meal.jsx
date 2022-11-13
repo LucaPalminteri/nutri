@@ -1,8 +1,9 @@
 import React from 'react'
 import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined';
 import { supabase } from '../supabaseClient';
+import MealInfo from './MealInfo';
 
-function Meal({meal}) {
+function Meal({meal,food}) {
 
   //TODO: fix last 3 hours of the day
 
@@ -29,7 +30,7 @@ function Meal({meal}) {
         alert(error)
     }
     }
-
+    
   return (
     <div className='card'>
         <header className='text'>
@@ -37,7 +38,7 @@ function Meal({meal}) {
             <button onClick={handleDelete}><DeleteOutlinedIcon fontSize='small'/></button>
         </header>
         <div className='divider'></div>
-        <main className='text'>{meal.description}</main>
+        {<MealInfo meal={meal} foods={food}/>}
         <div className='divider'></div>
         <footer className='text'>
             <span>{dayName} {dayNumber}, {monthName}</span>

@@ -1,9 +1,12 @@
 import '../styles/globals.css'
 import type { AppProps } from 'next/app'
 import Link from 'next/link'
-import { useEffect } from 'react'
+import {supabase} from '../supabaseClient'
 
 export default function App({ Component, pageProps }: AppProps) {
+
+  
+
 
   return (
     <>
@@ -13,7 +16,7 @@ export default function App({ Component, pageProps }: AppProps) {
       <Link href='/old-insert'>Old Insert</Link>
 
     </nav>
-    <Component {...pageProps} />
+    <Component {...pageProps}/>
     </>
   )
 }

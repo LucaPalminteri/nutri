@@ -7,10 +7,21 @@ import Spinner from '../components/Spinner'
 export default function Home() {
 
   const [meals, setMeals] = useState([])
+  const [foods, setFoods] = useState([])
 
   useEffect(() => {
     getMeals()
+    getFoodInfo()
   }, [])
+
+  const getFoodInfo = async () => {
+    try {
+      const { data, error} = await supabase.from('foods').select()
+      setFoods(data);
+  } catch (error) {
+      alert(error)
+  }
+  }
 
   const getMeals = async () => {
     try {
@@ -21,7 +32,7 @@ export default function Home() {
     }
   }
   
-  const arrMeals = meals.map((meal,index) => <Meal key={index} meal={meal}/>)
+  const arrMeals = meals.map((meal,index) => <Meal key={index} meal={meal} food={foods}/>)
 
   return (
     <div>
