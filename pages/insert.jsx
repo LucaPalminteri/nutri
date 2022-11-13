@@ -28,6 +28,27 @@ function insert() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+
+        // validations
+        if(mealName.current.value == "") {
+            alert("Meal Name Field is empty")
+            return ;
+        }
+
+        console.log(selectedFoods);
+        console.log(infoFoods);
+
+
+        if(selectedFoods.length == 0 || infoFoods.length == 0) {
+            alert("Food info fields are empty")
+            return ;
+        }
+
+        if(infoFoods.some(food => food.name == "default")) {
+            alert("Some food info fields are empty")
+            return ;
+        }
+
         let date = new Date()
         let type = ""
         let hours = date.getHours()
