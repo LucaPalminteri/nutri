@@ -177,3 +177,13 @@ textarea:focus {
   display: flex;
   justify-content: space-between;
 }
+
+table {
+  outline: 1px solid #000;
+
+}
+
+td,th {
+  outline: 1px solid #000;
+  padding: 8px;
+}
