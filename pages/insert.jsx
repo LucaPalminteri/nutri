@@ -74,8 +74,6 @@ function insert() {
         }
 
         return ;
-        await insertDB(nameFood.current.value)
-        nameFood.current.value = ""
     }
 
     const optionFoods = ()=> {
