@@ -68,7 +68,7 @@ textarea:focus {
   margin: 20px;
   background-color: #EFEFEF;
   border-radius: 12px;
-  box-shadow: 0 0 15px 6px #DEDEDE;
+  /* box-shadow: 0 0 15px 6px #DEDEDE; */
 }
 
 .card header {
