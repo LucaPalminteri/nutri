@@ -9,62 +9,93 @@ function insert() {
     },[])
 
     const [foods, setFoods] = useState([])
-    const [selectedFoods, setsSelectedFoods] = useState([])
+    const [selectedFoods, setSelectedFoods] = useState([])
+    const [infoFoods, setInfoFoods] = useState([])
     
-    const description = useRef();
+    const nameFood = useRef();
+    const amountFood = useRef();
+    const mealName = useRef();
 
     const getFood = async () => {
         try {
             const {data,error} = await supabase.from("foods").select("*")
             setFoods(data);
         } catch (error) {
-            console.log(error);
+            console.error(error);
         }
     }
-    console.log(foods);
 
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        let date = new Date()
+        let type = ""
+        let hours = date.getHours()
+        
+        if (hours == -1 || hours == -2 || hours == -3) type = "Dinner"
+        if(hours >= 0 && hours < 10) type = "Breakfast"
+        else if(hours >= 10 && hours < 12) type = "Breakfast Snack"
+        else if(hours >= 12 && hours < 14) type = "Lunch"
+        else if(hours >= 14 && hours < 16) type = "Afterlunch Snack"
+        else if(hours >= 16 && hours < 19) type = "Afternoon Snack"
+        else if(hours >= 19 && hours < 21) type = "Night Snack"
+        else if(hours >= 21 && hours < 24) type = "Dinner"
+
+        let meal_info = JSON.stringify([...infoFoods,{name:nameFood.current.value,amount:amountFood.current.value}])
+        
+        try {
+            const { data, error} = await supabase.from('meals').insert({created_at: new Date(),description:mealName.current.value,type,meal_info}) 
+            mealName.current.value = "";
+            setSelectedFoods([])
+            setInfoFoods([])
+        } catch (error) {
+            alert(error)
+        }
+
         return ;
-        await insertDB(description.current.value)
-        description.current.value = ""
+        await insertDB(nameFood.current.value)
+        nameFood.current.value = ""
     }
 
     const optionFoods = ()=> {
         return foods.sort((a, b) => {
-            let fa = a.name.toLowerCase(),
-                fb = b.name.toLowerCase();
-        
-            if (fa < fb) {
-                return -1;
-            }
-            if (fa > fb) {
-                return 1;
-            }
-            return 0;
+            let fa = a.name.toLowerCase();
+            let fb = b.name.toLowerCase();
+            return (fa < fb) ? -1 : (fa > fb) ? 1 : 0;
         })
-        .map(food => {
-            return (
-                <option className='option-food' key={food.id} value={food.name}>{food.name}</option>
-            )
-        })
+        .map(food => <option className='option-food' key={food.id} value={food.name}>{food.name}</option>)
     }
 
     const selectFoods = () => {
-        setsSelectedFoods(prev => prev.concat(<select className='select-food' key={Math.random()} ref={description}>
-            <option value="default" selected>~~ food ~~</option>
-            {optionFoods()}
-        </select>)) 
+        if (selectedFoods.length > 0) setInfoFoods(prev => prev.concat({name:nameFood.current.value,amount:amountFood.current.value}));
+        setSelectedFoods(prev => prev.concat(
+            <div className='row-food' key={Math.random()}>
+                <select className='select-food' ref={nameFood}>
+                    <option value="default" defaultValue={true}>~~ food ~~</option>
+                    {optionFoods()}
+                </select>
+                <input className='select-food' type="number" min={0} step="any" ref={amountFood}/>
+            </div>
+        )) 
     }
 
-    console.log(selectedFoods);
+    //    setInfoFoods(prev => prev.concat({name:nameFood.current.value,amount:amountFood.current.value}));
+    
+
+
+
 
   return (
     <div className='insert'>
         <form onSubmit={(e) => handleSubmit(e)}>
+            <label>Meal Name:</label>
+            <textarea ref={mealName}/>
+            <div className='label-container'>
+                <label>Food Name:</label>
+                <label>Amount (g/L):</label>
+            </div>
             {selectedFoods}
-            <button onClick={()=> selectFoods()}>+</button>
+            <button type='button' onClick={()=> selectFoods()}>+</button>
             <button type='submit'>Submit</button>
         </form>
     </div>
