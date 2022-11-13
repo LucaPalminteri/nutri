@@ -23,6 +23,9 @@ function Meal({meal,food}) {
 
 
     const handleDelete = async () => {
+      if(confirm(`Are you sure you want to delete the meal with id: ${meal.id}?`) == false) return ;
+
+      return ;
       try {
         const { data, error} = await supabase.from('meals').delete().eq('id',meal.id)
         location.reload()

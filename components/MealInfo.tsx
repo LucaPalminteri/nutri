@@ -57,7 +57,7 @@ function MealInfo({meal,foods}: Props) {
 
   return (
     <main className='text'>
-        <p>{meal.description}</p>
+        <p>{meal.description != null ? meal.description : "INFO BY NUTRIENTS"}</p>
         <table>
             <thead>
                 <th>Amount</th>
@@ -69,9 +69,9 @@ function MealInfo({meal,foods}: Props) {
                     let foodInfo:Food = foods.find((food:Food) => food.name == info.name);
                     
                     let food_calories = calcRuleOfThree(foodInfo?.portion,foodInfo?.calories,parseInt(info.amount))
-                    let food_carbohydrates = calcRuleOfThree(foodInfo.portion,foodInfo.carbohydrates,parseInt(info.amount))
-                    let food_protein = calcRuleOfThree(foodInfo.portion,foodInfo.protein,parseInt(info.amount))
-                    let food_fat = calcRuleOfThree(foodInfo.portion,foodInfo.total_fat,parseInt(info.amount))
+                    let food_carbohydrates = calcRuleOfThree(foodInfo?.portion,foodInfo?.carbohydrates,parseInt(info.amount))
+                    let food_protein = calcRuleOfThree(foodInfo?.portion,foodInfo?.protein,parseInt(info.amount))
+                    let food_fat = calcRuleOfThree(foodInfo?.portion,foodInfo?.total_fat,parseInt(info.amount))
                     
                     total_calories += food_calories
                     total_carbohydrates += food_carbohydrates
