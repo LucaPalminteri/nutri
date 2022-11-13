@@ -203,3 +203,25 @@ th {
   border-radius: 12px;
   font-weight: 700;
 }
+
+.trapezoid-down {
+  margin-top: 20px;
+  margin: auto;
+  width: 10%;
+  border-left: 40px solid transparent;
+  border-right: 40px solid transparent;
+  border-top: 40px solid #24a0ed;
+  padding: 0;
+  background-color: transparent;
+  border-radius: 0px;
+  position: relative;
+}
+
+.trapezoid-down::after {
+  content: "+";
+  position: absolute;
+  top: -38px;
+  left: -7px;
+  color: #FFF;
+  font-size: 26px;
+}
