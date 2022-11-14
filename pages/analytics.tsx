@@ -1,8 +1,11 @@
 import React from 'react'
 
 function analytics() {
+
   return (
-    <div>analytics</div>
+    <div>
+      <h1>Analytics</h1>
+    </div>
   )
 }
 
