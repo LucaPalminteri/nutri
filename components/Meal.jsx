@@ -5,27 +5,20 @@ import MealInfo from './MealInfo';
 
 function Meal({meal,food}) {
 
-  //TODO: fix last 3 hours of the day
-
-  let mealDate = meal.created_at;
-
     const date = new Date(meal.created_at)
+    date.setHours(date.getHours() - 3);
 
-    let monthName = date.toLocaleString("en-US", { month: "long" });
-    let dayName = date.toLocaleString("en-US", { weekday: "long" });
+    let monthName = date.toLocaleString("default", { month: "long" });
+    let dayName = date.toLocaleString("default", { weekday: "long" });
     let dayNumber = date.getDate();
-    let hours = date.getHours() - 3;
+    let hours = date.getHours();
     let minutes = date.getMinutes();
     if (minutes < 10) minutes = '0' + minutes;
     if (hours < 10) minutes = '0' + hours;
 
-    if(hours == -1 || hours == -2 || hours == -3) hours += 24
-
 
     const handleDelete = async () => {
       if(confirm(`Are you sure you want to delete the meal with id: ${meal.id}?`) == false) return ;
-
-      return ;
       try {
         const { data, error} = await supabase.from('meals').delete().eq('id',meal.id)
         location.reload()
