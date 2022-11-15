@@ -1,6 +1,8 @@
 import React, { useRef } from 'react'
 import { useEffect, useState } from 'react';
 import { supabase } from '../supabaseClient'
+import { getFoodInfo } from "../functions/getFoodInfo"
+
 function insert() {
 
     useEffect(() => {
@@ -27,18 +29,10 @@ function insert() {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        // validations
-
-        // if(infoFoods.some(food => food.name == "default")) {
-        //     alert("Some food info fields are empty")
-        //     return ;
-        // }
-
         let date = new Date()
         let type = ""
         let hours = date.getHours()
         
-        if (hours == -1 || hours == -2 || hours == -3) type = "Dinner"
         if(hours >= 0 && hours < 10) type = "Breakfast"
         else if(hours >= 10 && hours < 12) type = "Breakfast Snack"
         else if(hours >= 12 && hours < 14) type = "Lunch"
@@ -48,6 +42,12 @@ function insert() {
         else if(hours >= 21 && hours < 24) type = "Dinner"
 
         let meal_info = JSON.stringify([...infoFoods,{name:nameFood.current.value,amount:amountFood.current.value}])
+
+        console.log(meal_info);
+
+        getFoodInfo(meal_info);
+
+        return;
         
         try {
             const { data, error} = await supabase.from('meals').insert({created_at: new Date(),type,meal_info}) 
