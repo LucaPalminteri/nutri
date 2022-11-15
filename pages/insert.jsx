@@ -2,6 +2,7 @@ import React, { useRef } from 'react'
 import { useEffect, useState } from 'react';
 import { supabase } from '../supabaseClient'
 import { getFoodInfo } from "../functions/getFoodInfo"
+import { insertDayInfoFood } from "../functions/inserDayInfoFood" 
 
 function insert() {
 
@@ -43,9 +44,9 @@ function insert() {
 
         let meal_info = JSON.stringify([...infoFoods,{name:nameFood.current.value,amount:amountFood.current.value}])
 
-        console.log(meal_info);
+        let res = await getFoodInfo(meal_info)
 
-        getFoodInfo(meal_info);
+        insertDayInfoFood(res[0])
 
         return;
         
