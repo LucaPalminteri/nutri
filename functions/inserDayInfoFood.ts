@@ -12,7 +12,6 @@ export async function insertDayInfoFood(obj: FoodInfoOut) {
     let month = date.getMonth() + 1
     let year = date.getFullYear()
 
-    // TODO: fill db with some info
     let queryDate = `${month}/${day}/${year}`
 
     try {
