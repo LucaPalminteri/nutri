@@ -1,6 +1,6 @@
 import Head from 'next/head'
 import { useEffect, useState } from 'react'
-import {supabase} from '../supabaseClient'
+import { supabase } from '../supabaseClient'
 import Meal from "../components/Meal"
 import Spinner from '../components/Spinner'
 
@@ -16,23 +16,23 @@ export default function Home() {
 
   const getFoodInfo = async () => {
     try {
-      const { data, error} = await supabase.from('foods').select()
+      const { data, error } = await supabase.from('foods').select()
       setFoods(data);
-  } catch (error) {
+    } catch (error) {
       alert(error)
-  }
+    }
   }
 
   const getMeals = async () => {
     try {
-      const {data,error} = await supabase.from("meals").select().order('created_at',{ascending:false})
+      const { data, error } = await supabase.from("meals").select().order('created_at', { ascending: false })
       setMeals(data)
     } catch (error) {
       alert(error)
     }
   }
-  
-  const arrMeals = meals.map((meal,index) => <Meal key={index} meal={meal} food={foods}/>)
+
+  const arrMeals = meals.map((meal, index) => <Meal key={index} meal={meal} foods={foods} />)
 
   return (
     <div>

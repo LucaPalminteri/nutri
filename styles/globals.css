@@ -97,6 +97,7 @@ textarea:focus {
   margin: 0;
 
 }
+
 .card footer {
   display: flex;
   justify-content: space-between;
@@ -118,20 +119,21 @@ textarea:focus {
 
 @keyframes spinner {
   0% {
-      transform: translate3d(-50%, -50%, 0) rotate(0deg);
+    transform: translate3d(-50%, -50%, 0) rotate(0deg);
   }
+
   100% {
-       transform: translate3d(-50%, -50%, 0) rotate(360deg);
+    transform: translate3d(-50%, -50%, 0) rotate(360deg);
   }
 }
 
 .spinner {
   margin: auto;
-  height: 10vh;  
+  height: 10vh;
   opacity: 1;
   position: relative;
   top: 20vh;
-  transition: opacity linear 0.1s;    
+  transition: opacity linear 0.1s;
 }
 
 
@@ -189,7 +191,8 @@ thead {
   background-color: #CCC;
 }
 
-td,th {
+td,
+th {
   border: 1px solid #000;
   padding: 8px;
 }
@@ -206,7 +209,23 @@ th {
   font-weight: 700;
 }
 
+@keyframes open {
+  0% {
+    transform: scale(.4);
+  }
+
+  60% {
+    transform: scale(1.2);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+
 .trapezoid-down {
+  animation-name: open;
+  animation-duration: .2s;
   margin-top: 20px;
   margin: auto;
   width: 10%;
@@ -226,4 +245,8 @@ th {
   left: -7px;
   color: #FFF;
   font-size: 26px;
+}
+
+.analytics {
+  text-align: center;
 }
