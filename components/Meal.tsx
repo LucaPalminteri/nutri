@@ -16,8 +16,8 @@ function Meal({ meal, foods }: Props) {
   let dayNumber: number = date.getDate();
   let nHours: number = date.getHours();
   let nMinutes: number = date.getMinutes();
-  let strMinutes: string = '';
-  let strHours: string = '';
+  let strMinutes: string = nMinutes.toString();
+  let strHours: string = nHours.toString();
   if (nMinutes < 10) strMinutes = '0' + nMinutes.toString();
   if (nHours < 10) strHours = '0' + nHours.toString();
 
