@@ -37,8 +37,6 @@ function insert() {
             return;
         }
 
-        return ;
-
         let date = new Date()
         let type = ""
         let hours = date.getHours()
@@ -56,7 +54,6 @@ function insert() {
 
         insertDayInfoFood(res[0])
 
-        return ;
         try {
             const { data, error } = await supabase.from(DB_TABLE).insert({ created_at: new Date(), type, meal_info })
             setSelectedFoods([])

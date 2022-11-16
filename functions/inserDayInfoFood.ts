@@ -13,7 +13,7 @@ export async function insertDayInfoFood(obj: FoodInfoOut) {
     let year = date.getFullYear()
 
     // TODO: fill db with some info
-    let queryDate = `${month}/${day - 1}/${year}`
+    let queryDate = `${month}/${day}/${year}`
 
     try {
         const { data, error }: PostgrestResponse<FoodInfoOut> = await supabase.from(DB_TABLE).select().eq('date', queryDate)
