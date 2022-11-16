@@ -1,4 +1,4 @@
-export function sortArrayByName(arr:Array<any>) {
+export function sortArrayByName(arr: Array<any>) {
     return arr.sort((a, b) => {
         let fa = a.name.toLowerCase();
         let fb = b.name.toLowerCase();

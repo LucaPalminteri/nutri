@@ -1,103 +1,76 @@
 import { PostgrestResponse } from "@supabase/supabase-js";
 import { supabase } from "../supabaseClient";
 import { sortArrayByName } from "./sortArrayByName"
+import { FoodInfoOut, FoodMealInfo } from "../types/types"
 
-type FoodMealInfo = {
-    name:string,
-    amount:string
-}
+const DB_TABLE: string = 'foods';
 
-type FoodInfoOut = {
-    calcium:number,
-    calories:number,
-    carbohydrates:number,
-    cholesterol:number,
-    dietary_fiber:number,
-    iron:number,
-    magnesium:number,
-    potassium:number,
-    protein:number,
-    sodium:number,
-    sugars:number,
-    total_fat:number,
-    vitamin_A:number,
-    vitamin_B2:number,
-    vitamin_B3:number,
-    vitamin_C:number,
-    vitamin_D:number,
-    vitamin_E:number,
-    vitamin_K:number,
-    water:number
-}
+export async function getFoodInfo(arrayInfo: string) {
 
-const TABLE = 'foods';
-
-export async function getFoodInfo(arrayInfo:string) {
-
-    let aux:Array<FoodMealInfo> = JSON.parse(arrayInfo)
-    let query:string = ''
-    let outArr:Array<FoodInfoOut> = []
-    let sumObject:FoodInfoOut ={
-            calcium:0,
-            calories:0,
-            carbohydrates:0,
-            cholesterol:0,
-            dietary_fiber:0,
-            iron:0,
-            magnesium:0,
-            potassium:0,
-            protein:0,
-            sodium:0,
-            sugars:0,
-            total_fat:0,
-            vitamin_A:0,
-            vitamin_B2:0,
-            vitamin_B3:0,
-            vitamin_C:0,
-            vitamin_D:0,
-            vitamin_E:0,
-            vitamin_K:0,
-            water:0
+    let aux: Array<FoodMealInfo> = JSON.parse(arrayInfo)
+    let query: string = ''
+    let outArr: Array<FoodInfoOut> = []
+    let sumObject: FoodInfoOut = {
+        calcium: 0,
+        calories: 0,
+        carbohydrates: 0,
+        cholesterol: 0,
+        dietary_fiber: 0,
+        iron: 0,
+        magnesium: 0,
+        potassium: 0,
+        protein: 0,
+        sodium: 0,
+        sugars: 0,
+        total_fat: 0,
+        vitamin_A: 0,
+        vitamin_B2: 0,
+        vitamin_B3: 0,
+        vitamin_C: 0,
+        vitamin_D: 0,
+        vitamin_E: 0,
+        vitamin_K: 0,
+        water: 0
     }
 
     sortArrayByName(aux)
 
     // create the query for all items in the insert section
-    aux.forEach((element:any) => query += `name.eq.${element.name},`);
-    query = query.slice(0,-1);
+    aux.forEach((element: any) => query += `name.eq.${element.name},`);
+    query = query.slice(0, -1);
 
     try {
-        const { data, error }:PostgrestResponse<any> = await supabase.from(TABLE).select().or(query);
+        const { data, error }: PostgrestResponse<any> = await supabase.from(DB_TABLE).select().or(query);
 
         if (data != null) sortArrayByName(data);
 
         // retrive the items in the insert with all of its information
 
-        data?.forEach((element:any, index:number) => {
+        data?.forEach((element: any, index: number) => {
             // iterating for every full detailed food to create the output
-            let output:FoodInfoOut = {
-                calcium:0,
-                calories:0,
-                carbohydrates:0,
-                cholesterol:0,
-                dietary_fiber:0,
-                iron:0,
-                magnesium:0,
-                potassium:0,
-                protein:0,
-                sodium:0,
-                sugars:0,
-                total_fat:0,
-                vitamin_A:0,
-                vitamin_B2:0,
-                vitamin_B3:0,
-                vitamin_C:0,
-                vitamin_D:0,
-                vitamin_E:0,
-                vitamin_K:0,
-                water:0
+            let output: FoodInfoOut = {
+                calcium: 0,
+                calories: 0,
+                carbohydrates: 0,
+                cholesterol: 0,
+                dietary_fiber: 0,
+                iron: 0,
+                magnesium: 0,
+                potassium: 0,
+                protein: 0,
+                sodium: 0,
+                sugars: 0,
+                total_fat: 0,
+                vitamin_A: 0,
+                vitamin_B2: 0,
+                vitamin_B3: 0,
+                vitamin_C: 0,
+                vitamin_D: 0,
+                vitamin_E: 0,
+                vitamin_K: 0,
+                water: 0
             }
-            let factor = parseFloat(aux[index].amount)/element.portion
+            let factor = parseFloat(aux[index].amount) / element.portion
 
             // calculating info for each food
             let calcium = element.calcium * factor;
@@ -164,7 +137,7 @@ export async function getFoodInfo(arrayInfo:string) {
 
             outArr.push(output)
         })
-        
+
     } catch (error) {
         console.error(error);
     }
