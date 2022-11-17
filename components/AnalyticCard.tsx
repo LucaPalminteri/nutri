@@ -1,5 +1,6 @@
 import React from 'react'
 import { Food, FoodMealInfo } from "../types/types"
+import { multipleConverter } from '../functions/multipleConverter'
 
 type Props = {
     foodInfo:Food
@@ -37,28 +38,56 @@ function AnalyticCard({foodInfo}:Props) {
             </tr>
             <tr>
                 <th>Potassium</th>
-                <td>{foodInfo.potassium.toFixed(2)}g</td>
+                <td>{foodInfo.potassium.toFixed(4)}g</td>
             </tr>
             <tr>
                 <th>Calcium</th>
-                <td>{foodInfo.calcium.toFixed(2)}g</td>
+                <td>{multipleConverter(parseFloat(foodInfo.calcium.toFixed(8)),'g')}</td>
             </tr>
             <tr>
                 <th>Iron</th>
-                <td>{foodInfo.iron.toFixed(2)}g</td>
+                <td>{multipleConverter(parseFloat(foodInfo.iron.toFixed(8)),'g')}</td>
             </tr>
             <tr>
                 <th>Cholesteron</th>
-                <td>{foodInfo.cholesterol.toFixed(2)}g</td>
+                <td>{multipleConverter(parseFloat(foodInfo.cholesterol.toFixed(8)),'g')}</td>
             </tr>
             <tr>
                 <th>Magnesium</th>
-                <td>{foodInfo.magnesium.toFixed(2)}g</td>
+                <td>{multipleConverter(parseFloat(foodInfo.magnesium.toFixed(8)),'g')}</td>
             </tr>
             <tr>
                 <th>Vitamin A</th>
-                <td>{foodInfo.vitamin_A.toFixed(2)}g</td>
+                <td>{multipleConverter(parseFloat(foodInfo.vitamin_A.toFixed(8)),'g')}</td>
             </tr>
+            <tr>
+                <th>Vitamin B2</th>
+                <td>{multipleConverter(parseFloat(foodInfo.vitamin_B2.toFixed(8)),'g')}</td>
+            </tr>
+            <tr>
+                <th>Vitamin B3</th>
+                <td>{multipleConverter(parseFloat(foodInfo.vitamin_B3.toFixed(8)),'g')}</td>
+            </tr>
+            <tr>
+                <th>Vitamin C</th>
+                <td>{multipleConverter(parseFloat(foodInfo.vitamin_C.toFixed(8)),'g')}</td>
+            </tr>
+            <tr>
+                <th>Vitamin D</th>
+                <td>{multipleConverter(parseFloat(foodInfo.vitamin_D.toFixed(8)),'g')}</td>
+            </tr>
+            <tr>
+                <th>Vitamin E</th>
+                <td>{multipleConverter(parseFloat(foodInfo.vitamin_E.toFixed(8)),'g')}</td>
+            </tr>
+            <tr>
+                <th>Vitamin K</th>
+                <td>{multipleConverter(parseFloat(foodInfo.vitamin_K.toFixed(8)),'g')}</td>
+            </tr>
+            {/* <tr>
+                <th>Water</th>
+                <td>{foodInfo.water.toFixed(2)}g</td>
+            </tr> */}
         </table>
     </div>
   )
