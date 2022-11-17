@@ -38,7 +38,7 @@ function MealInfo({ meal, foods }: Props) {
 
                         return (
                             <tr key={index}>
-                                <td>{multipleConverter(parseFloat(info.amount))}{foodInfo?.unit}</td>
+                                <td>{multipleConverter(parseFloat(info.amount),foodInfo.unit)}</td>
                                 <td>{info.name}</td>
                                 <td>{foodInfo?.portion != null ? food_calories.toFixed(2) + "kcal" : ""}</td>
                             </tr>
