@@ -13,9 +13,9 @@ Nutri is a web application that was built for personal use. It's an app that fac
 
 ## Ilustrations
 
-![Home page](/public/home.jpg)
-![Insert food page](/public/insert.jpg)
-![Analytics page](/public/analytics.jpg)
+![Home page](/public/home.png)
+![Insert food page](/public/insert.png)
+![Analytics page](/public/analytics.png)
 
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
